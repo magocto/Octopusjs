@@ -1,41 +1,87 @@
-                                                            O       
-                          O                                         
-                         oOo                                        
-            .oOo. .oOo    o   .oOo. .oOo. O   o  .oOo      'o .oOo  
-            O   o O       O   O   o O   o o   O  `Ooo.      O `Ooo. 
-            o   O o       o   o   O o   O O   o      O oO   o     O 
-            `OoO' `OoO'   `oO `OoO' oOoO' `OoO'o `OoO' Oo   O `OoO' 
-                                    O                       o       
-                                    o'                    oO'    
 
-octopus.js is a object composition library that allows you to create object classes with traits (sometimes refered to tentacles)
+       .oOo.          O                                  O       
+       O   o         oOo                                         
+       O   O  .oOo    o   .oOo. .oOo. O   o  .oOo       'o .oOo  
+       O   O  O       O   O   o O   o o   O  `Ooo.       O `Ooo. 
+       o   O  o       o   o   O o   O O   o      O  oO   o     O 
+       `OoO'  `OoO'   `oO `OoO' oOoO' `OoO'o `OoO'  Oo   O `OoO' 
+                                O                        o       
+                               o'                      oO'    
+
+octopus.js is a object composition library that allows you to create object classes with traits (sometimes referred to tentacles)
 
 As applications get larger staying organized gets harder. Trying to balance not polluting the global scope while keeping every object accessible for testing gets tedious.
-You can use octopus paths to simplify namespacing you applications various modules.
+You can use octopus paths to simplify namespacing your applications various modules.
+
+Octopus Shortcut:
+
+You can use the _8 shortcut to refer to Octopus
+
+    var models = _8.path("myapp.models");
 
 Namespacing:
 
-Octopus.path("myapp.models", {
-   _books:[];
-   BookModel:function(title, author) {
-   		this.title = title;
-   		this.author = author;
-   },
-   addBook:function(title, author) {
-   		this._books.push(new this.Bookmodel(title, Author);
-   }[, "Dance of Dragons", ""],
-   
-});
+   Octopus.path("myapp.models", {
+      _books:[];
+       BookModel:function(title, author) {
+   		    this.title = title;
+   		    this.author = author;
+       },
+       addBook:function(title, author) {
+   		    this._books.push(new this.Bookmodel(title, Author);
+       }
+    });
 
 // somewhere else in your app
 var models = Octopus.path("myapp.models");
-model.addBook("Smashed, Squashed, Splattered, Chewed, Chunked and Spewed", "Lance Carbuncle");
+models.addBook("Smashed, Squashed, Splattered, Chewed, Chunked and Spewed", "Lance Carbuncle");
 
 
+Tentacles/Traits and object composition
+	
+In this example we have a library that can check out books to students, other libraries, and the restoration shop. I know, just go with it.
+
+	
+create a tentacle for the borrowing functionality:
+
+	Octopus.t("borrower", {
+		construct:function() {
+			// this function will be called when the object that it has it as a trait is constructed
+			this._checkedOut = [];
+		},
+		checkout:function(book) {
+			this._checkedOut.push(book);
+		}
+	}});
+	
+	Octopus.t("scheduled", {
+		setSchedule:function(schedule) {
+			this.schedule = schedule;
+		}
+	}})
+	
+
+now we can create our student class
+
+	var Student = Octopus.spawn("borrower, scheduled, otherStudentTrait", {
+		// this will be called after all traits have been initialized 
+		construct:function(name, schedule) {
+			console.log("create student "+id+" ");
+			this.setSchedule(schedule);
+			
+			// all new students live in redthorn hall no matter what for some reason...
+			this.moveIn("redthorn hall");
+		},
+		// adding student specific functions
+		moveIn:function(dorm) {
+			this.dorm = dorm;
+		}
+	});
 
 
+now we can make as many students want
 
-
+	var st = new Student("jethro", {"biology":"104", "welding":"201"});
 
 
 
@@ -43,13 +89,13 @@ model.addBook("Smashed, Squashed, Splattered, Chewed, Chunked and Spewed", "Lanc
 
 
                                                                                 
-                                                                              ..
-                                                   OOO8$ZZI.                  ..
-                                                MOD8OZZ$O7Z7I.                ..
-                                              .OZZZZZZO77$OZ8Z.                .
-                                              ZZOZZ$$Z$7$ZZ7O$D.              . 
-                                            .OOZZZ7$ZO7I7$ZO7ZZ.              ..
-                                            OO$Z$$$7??$$7$$Z$.=.               .
+                                                                                
+                                                   OOO8$ZZI.                    
+                                                MOD8OZZ$O7Z7I.                  
+                                              .OZZZZZZO77$OZ8Z.                 
+                                              ZZOZZ$$Z$7$ZZ7O$D.                
+                                            .OOZZZ7$ZO7I7$ZO7ZZ.                
+                                            OO$Z$$$7??$$7$$Z$.=.                
                                 I8++O$=.   .7=OZZI7O7$$$ZOO8OI?.                
                             .~I?7+:,OO+I$  OOO$7Z7$Z$O$ZZZDZ$7..                
                             ?:?~87N...$+:.DZ87$Z77+I=ZO8O$7ZZO..                
