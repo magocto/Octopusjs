@@ -9,10 +9,18 @@
  * Dependencies:
  * Underscore.js
  * http://documentcloud.github.com/underscore/
+ * 
+ * 
+ * @author Jason Bennett
  */
 (function() {	
 	var root = this;
 	var oldOctopus = root.Octopus;
+	
+	
+	/*
+	 * @namespace Reference to Octopus, _8 is a shortcut
+	 */
 	
 	var Octopus, _8;
 	if (typeof exports !== 'undefined') {
@@ -27,6 +35,10 @@
 	Octopus._traits = {};
 
 	// create a new tentacle (trait)
+	/*
+	 *
+	 */
+	
 	Octopus.t =  function(name, proto) {
 		if(!name) throw "Octopus.t Invalid name"
 		if(!proto) return this._traits[id];
@@ -59,9 +71,7 @@
 		});
 		delete proto.construct;
 		_.extend(fn.prototype, proto);
-		
-		
-		
+
 		return fn;
 	}
 	Octopus._getBaseObj = function(construct) {

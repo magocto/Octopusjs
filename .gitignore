@@ -1,3 +1,4 @@
 .tmp*
 .project
 .DS_Store
+jsdoc-toolkit

@@ -3,8 +3,24 @@
 		<title>Octopus.js</title>
 	</head>
 	<body>
-		<div>
+		<p>
 			Octopusjs is an object composition library. Build classes using traits for multiple inheritance.
+		</p>
+		<div>
+			<p>Defined traits to be used in object compositions</p>
+<pre>
+	_8.t("mytrait", {doSomeStuff:function() { //do some stuff}});
+</pre>
+			<p>you can also pass objects from other libraries. Add Backbone.Events as a trait.</p>
+<pre>
+	_8.t("events", Backbone.Events);
+</pre>
 		</div>
+		<p>Use spawn to create object classes</p>
+<pre>
+	var obj = _8.spawn("mytrait, events", {construct:function() {
+	
+	}});
+</pre>
 	</body>
 </html>
