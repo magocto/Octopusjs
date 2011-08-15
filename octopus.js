@@ -12,6 +12,7 @@
  * 
  * 
  * @author Jason Bennett
+ * @function
  */
 (function() {	
 	var root = this;
@@ -19,6 +20,8 @@
 	
 	
 	/*
+	 * @constructor 
+	 * 
 	 * @namespace Reference to Octopus, _8 is a shortcut
 	 */
 	
@@ -34,11 +37,10 @@
 
 	Octopus._traits = {};
 
-	// create a new tentacle (trait)
-	/*
-	 *
+
+	/* @param {String} name
+	 * @param {Object) proto
 	 */
-	
 	Octopus.t =  function(name, proto) {
 		if(!name) throw "Octopus.t Invalid name"
 		if(!proto) return this._traits[id];

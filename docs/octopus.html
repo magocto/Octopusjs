@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>octopus.js</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id="background"></div>
+<div id='container'>
+  
+  <div class='section'>
+    <div class='docs'><h1>octopus.js</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>!
+<em> Octupus.js v0.1
+</em> A object composition and namespacing library
+<em> http://octopusjs.org
+</em>
+<em> Copyright (c) 2011 Jason "Magocto" Bennett
+</em> Octopus may be freely distributed under the MIT license.
+<em>
+</em> Dependencies:
+<em> Underscore.js
+</em> http://documentcloud.github.com/underscore/
+<em>
+</em>
+<em> @author Jason Bennett
+</em> @function</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>	
+	<span class="kd">var</span> <span class="nx">root</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">oldOctopus</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Octopus</span><span class="p">;</span>
+	
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <ul>
+<li>@constructor
+*</li>
+<li>@namespace Reference to Octopus, _8 is a shortcut</li>
+</ul>
+<p>@param {String} name</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	
+	<span class="kd">var</span> <span class="nx">Octopus</span><span class="p">,</span> <span class="nx">_8</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">exports</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">Octopus</span> <span class="o">=</span> <span class="nx">_8</span> <span class="o">=</span> <span class="nx">exports</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">Octopus</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">_8</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">Octopus</span> <span class="o">=</span> <span class="p">{};</span>
+	<span class="p">}</span>
+	
+	
+	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">VERSION</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span><span class="p">;</span>
+
+	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">_traits</span> <span class="o">=</span> <span class="p">{};</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <ul>
+<li>@param {Object) proto</li>
+</ul>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span>  <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">proto</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">name</span><span class="p">)</span> <span class="k">throw</span> <span class="s2">&quot;Octopus.t Invalid name&quot;</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">proto</span><span class="p">)</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_traits</span><span class="p">[</span><span class="nx">id</span><span class="p">];</span>
+		<span class="kd">var</span> <span class="nx">construct</span> <span class="o">=</span> <span class="nx">proto</span><span class="p">.</span><span class="nx">construct</span><span class="p">;</span>
+		<span class="k">delete</span> <span class="nx">proto</span><span class="p">.</span><span class="nx">construct</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_traits</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OctoTrait</span><span class="p">(</span><span class="nx">proto</span><span class="p">,</span> <span class="nx">construct</span><span class="p">);</span>		
+	<span class="p">}</span>
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>check to see if a trait has been added</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">hasT</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_traits</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
+	<span class="p">}</span>
+	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">_paths</span> <span class="o">=</span> <span class="p">{};</span>
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      <p>create object blueprint</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">spawn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">traits</span><span class="p">,</span> <span class="nx">proto</span><span class="p">)</span> <span class="p">{</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <p>create the a new base class each time so we can alter the prototype at will</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">proto</span><span class="p">)</span> <span class="nx">proto</span> <span class="o">=</span> <span class="p">{};</span>
+	 	
+		<span class="kd">var</span> <span class="nx">fn</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getBaseObj</span><span class="p">(</span><span class="nx">proto</span><span class="p">.</span><span class="nx">construct</span><span class="p">);</span>
+	
+		<span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span> <span class="nx">getTraitList</span><span class="p">(</span><span class="nx">traits</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">t</span><span class="p">;</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">Octopus</span><span class="p">.</span><span class="nx">_traits</span><span class="p">[</span><span class="nx">id</span><span class="p">])</span> <span class="p">{</span>
+				<span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_traits</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+				<span class="k">if</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">init</span><span class="p">)</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_inits</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">init</span><span class="p">);</span>
+				<span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">t</span><span class="p">.</span><span class="nx">proto</span><span class="p">);</span>
+			<span class="p">}</span>  
+		<span class="p">});</span>
+		<span class="k">delete</span> <span class="nx">proto</span><span class="p">.</span><span class="nx">construct</span><span class="p">;</span>
+		<span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">proto</span><span class="p">);</span>
+
+		<span class="k">return</span> <span class="nx">fn</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">_getBaseObj</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">construct</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">fn</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+			 <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+	        <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_inits</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">init</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">init</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">self</span><span class="p">);</span>
+	        <span class="p">});</span>
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p>fire the object constructor after all tentacles have been initialized</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	        <span class="k">this</span><span class="p">.</span><span class="nx">_useConstructor</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_traits</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_inits</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+		<span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_useConstructor</span> <span class="o">=</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">construct</span><span class="p">))</span> <span class="o">?</span> <span class="nx">construct</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+		<span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasT</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_traits</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">fn</span><span class="p">;</span>
+	<span class="p">}</span>
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <p>a package system</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">addon</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">_</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">p</span><span class="p">))</span> <span class="k">throw</span> <span class="s2">&quot;Octopus space path must be a String&quot;</span><span class="p">;</span>
+		<span class="k">return</span>  <span class="nx">Octopus</span><span class="p">.</span><span class="nx">_getPathObj</span><span class="p">(</span><span class="nx">Octopus</span><span class="p">.</span><span class="nx">_paths</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">),</span> <span class="nx">addon</span><span class="p">);</span>
+	<span class="p">}</span>
+	
+	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">_getPathObj</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">parts</span><span class="p">,</span> <span class="nx">addon</span><span class="p">)</span> <span class="p">{</span>
+		
+		<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">parts</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+		<span class="kd">var</span>	<span class="nx">current</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p>create a new package if the one we are looking for is not there</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">current</span><span class="p">)</span> 
+			<span class="nx">parent</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">current</span> <span class="o">=</span> <span class="p">{};</span>
+			</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p>continue traversing if we are not at the bottom</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="k">if</span><span class="p">(</span><span class="nx">parts</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> 
+			<span class="k">return</span> <span class="nx">Octopus</span><span class="p">.</span><span class="nx">_getPathObj</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">parts</span><span class="p">,</span> <span class="nx">addon</span><span class="p">);</span>
+			</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <p>at the last path extend if needed</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="k">if</span> <span class="p">(</span><span class="nx">addon</span><span class="p">)</span> 
+			<span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">addon</span><span class="p">);</span>
+			
+		<span class="k">return</span> <span class="nx">current</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">noConflict</span> <span class="o">=</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">root</span><span class="p">.</span><span class="nx">Octopus</span> <span class="o">=</span> <span class="nx">root</span><span class="p">.</span><span class="nx">_8</span> <span class="o">=</span> <span class="nx">oldOctopus</span><span class="p">;</span>
+		<span class="k">return</span> <span class="nx">Octopus</span><span class="p">;</span>
+	<span class="p">}</span>
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      <p>extend the Octopus namespace</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">learn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ext</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">functions</span><span class="p">(</span><span class="nx">ext</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+			<span class="nx">Octopus</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">ext</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+	    <span class="p">});</span>
+	<span class="p">};</span>
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p>run a anynomous function</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">go</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imports</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+		<span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">imports</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">scope</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Octopus</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+		<span class="p">});</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">action</span><span class="p">))</span> <span class="nx">action</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+	<span class="p">}</span>
+	</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div><div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      <p>a little fly weight obj to hold traits</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="kd">var</span> <span class="nx">OctoTrait</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">proto</span><span class="p">,</span> <span class="nx">init</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">proto</span> <span class="o">=</span> <span class="p">(</span><span class="o">!</span><span class="nx">proto</span><span class="p">)</span> <span class="o">?</span> <span class="p">{}</span> <span class="o">:</span> <span class="nx">proto</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="kd">var</span> <span class="nx">getTraitList</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">traits</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">traits</span><span class="p">))</span> <span class="k">return</span> <span class="nx">traits</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">traits</span><span class="p">))</span> <span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">traits</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">trim</span><span class="p">(</span><span class="nx">t</span><span class="p">)});</span>
+		<span class="k">return</span> <span class="p">[];</span>
+	<span class="p">}</span> 
+	
+	<span class="kd">var</span> <span class="nx">trim</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\s*([\S\s]*?)\s*$/</span><span class="p">,</span> <span class="s1">&#39;$1&#39;</span><span class="p">);</span>
+	<span class="p">}</span>
+
+<span class="p">})();</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>
