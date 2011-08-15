@@ -8,36 +8,32 @@
                                 O                        o       
                                o'                      oO'    
 
-octopus.js is a object composition library that allows you to create object classes with traits (sometimes referred to tentacles)
+octopus.js is a object composition library that allows you to create object classes with traits (sometimes referred to tentacles). We can build our objects picking from the build your own menu.
+we can say
 
-As applications get larger staying organized gets harder. Trying to balance not polluting the global scope while keeping every object accessible for testing gets tedious.
-You can use octopus paths to simplify namespacing your applications various modules.
+	var MegaClass = Octopus.spawn(["events", "stateMachine", "view", "viewContainer", "lockable"], {
+		construct:function(locked, elementid) {
+			this.sm.setState("Idle");
+			this.setLocked(locked);
+			this.view.setEl($("#"+elementid));
+		},
+		doSomeMegaClassStuff:function() {
+	
+		}
+	}
 
-Octopus Shortcut:
+	var m1 = new MegaClass(true, "someElementId");
+	m1.setState("gearing up");
+	m1.doSomeMegaClassStuff();
 
-You can use the _8 shortcut to refer to Octopus
+This allows us to create a object that has events, a state-machine, has a view itself, holds other views, and is lockable. 
 
-    var models = _8.path("myapp.models");
+*----------------------------------------------------------------------------------*
+*  Tentacles/Traits and object composition:                                        *
+*----------------------------------------------------------------------------------*
 
-Namespacing:
+Maximize you code reuse by using tentacles/traits to be grafted onto you objects 
 
-   Octopus.path("myapp.models", {
-      _books:[];
-       BookModel:function(title, author) {
-   		    this.title = title;
-   		    this.author = author;
-       },
-       addBook:function(title, author) {
-   		    this._books.push(new this.Bookmodel(title, Author);
-       }
-    });
-
-// somewhere else in your app
-var models = Octopus.path("myapp.models");
-models.addBook("Smashed, Squashed, Splattered, Chewed, Chunked and Spewed", "Lance Carbuncle");
-
-
-Tentacles/Traits and object composition
 	
 In this example we have a library that can check out books to students, other libraries, and the restoration shop. I know, just go with it.
 
@@ -82,6 +78,36 @@ now we can create our student class
 now we can make as many students want
 
 	var st = new Student("jethro", {"biology":"104", "welding":"201"});
+
+
+
+    
+*----------------------------------------------------------------------------------*
+*  Namespacing:                                                                    *
+*----------------------------------------------------------------------------------*
+
+As applications get larger staying organized gets harder. Trying to balance not polluting the global scope while keeping every object accessible for testing gets tedious.
+You can use octopus paths to simplify namespacing your applications various modules.
+
+   Octopus.path("myapp.models", {
+      _books:[];
+       BookModel:function(title, author) {
+   		    this.title = title;
+   		    this.author = author;
+       },
+       addBook:function(title, author) {
+   		    this._books.push(new this.Bookmodel(title, Author);
+       }
+    });
+
+somewhere else in your app:
+
+	var models = Octopus.path("myapp.models");
+	models.addBook("Smashed, Squashed, Splattered, Chewed, Chunked and Spewed", "Lance Carbuncle");
+
+you can also call Octopus by its short form _8
+
+	 var models = _8.path("myapp.models");
 
 
 
