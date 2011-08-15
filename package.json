@@ -1,0 +1,12 @@
+{
+  "name"          : "octopus",
+  "description"   : "A object composition library",
+  "homepage"      : "",
+  "keywords"      : ["namespace", "object", "composition", "util", "dependacncy injection", "server", "client", "browser"],
+  "author"        : "Jason Bennett <magocto@gmail.com>",
+  "contributors"  : [],
+  "dependencies"  : ["underscore"],
+  "repository"    : {"type": "git", "url": "git@github.com:magocto/Octopusjs.git"},
+  "main"          : "octopus.js",
+  "version"       : "1.1.7"
+}
