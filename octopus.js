@@ -105,7 +105,7 @@ Dependencies:
 		return new clz(config);
 	}
 	
-	// create a new base class to add traits to
+	// create a new base class to graft traits on
 	Octopus._getBaseObj = function(construct) {
 		var fn = function () {
 			 var self = this;
@@ -132,7 +132,7 @@ Dependencies:
 	
 	/* create, get, or append a namespace
 	 @param p {String} a dot delimited path
-	 @param p
+	 @param addon {Object} object to be added to path
 	*/
 	Octopus.path = function(p, addon) {
 		if(!_.isString(p)) throw "Octopus space path must be a String";
@@ -146,13 +146,13 @@ Dependencies:
 		var name = parts.shift();
 		var	current = parent[name];
 
-		// create a new package if the one we are looking for is not there
+		// create a new path object if needed
 		if (!current) parent[name] = current = {};
 			
-		// continue traversing if we are not at the bottom
+		// continue traversing the path
 		if(parts.length) return Octopus._getPathObj(current, parts, addon);
 			
-		// at the last path extend if needed
+		// do any appending
 		if (addon) _.extend(current, addon);
 		  
 		// always return an object	

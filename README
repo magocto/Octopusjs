@@ -1,14 +1,13 @@
-         _             _           _            _            _      _                  _                    _        _        
-        /\ \         /\ \         /\ \         /\ \         /\ \   /\_\               / /\                 /\ \     / /\      
-       /  \ \       /  \ \        \_\ \       /  \ \       /  \ \ / / /         _    / /  \                \ \ \   / /  \     
-      / /\ \ \     / /\ \ \       /\__ \     / /\ \ \     / /\ \ \\ \ \__      /\_\ / / /\ \__             /\ \_\ / / /\ \__  
-     / / /\ \ \   / / /\ \ \     / /_ \ \   / / /\ \ \   / / /\ \_\\ \___\    / / // / /\ \___\           / /\/_// / /\ \___\ 
-    / / /  \ \_\ / / /  \ \_\   / / /\ \ \ / / /  \ \_\ / / /_/ / / \__  /   / / / \ \ \ \/___/  _       / / /   \ \ \ \/___/ 
-   / / /   / / // / /    \/_/  / / /  \/_// / /   / / // / /__\/ /  / / /   / / /   \ \ \       /\ \    / / /     \ \ \       
-  / / /   / / // / /          / / /      / / /   / / // / /_____/  / / /   / / /_    \ \ \      \ \_\  / / /  _    \ \ \      
- / / /___/ / // / /________  / / /      / / /___/ / // / /        / / /___/ / //_/\__/ / /  _   / / /_/ / /  /_/\__/ / /      
-/ / /____\/ // / /_________\/_/ /      / / /____\/ // / /        / / /____\/ / \ \/___/ /  /\_\/ / /__\/ /   \ \/___/ /       
-\/_________/ \/____________/\_\/       \/_________/ \/_/         \/_________/   \_____\/   \/_/\/_______/     \_____\/       
+    )                                              
+ ( /(           )                                  
+ )\())       ( /(               (          (       
+((_)\    (   )\()) (   `  )    ))\  (      )\  (   
+  ((_)   )\ (_))/  )\  /(/(   /((_) )\    ((_) )\  
+ / _ \  ((_)| |_  ((_)((_)_\ (_))( ((_)     ! ((_) 
+| (_) |/ _| |  _|/ _ \| '_ \)| || |(_-< _  | |(_-< 
+ \___/ \__|  \__|\___/| .__/  \_,_|/__/(_)_/ |/__/ 
+                      |_|                |__/      
+  
 
 octopus.js is a object composition library that allows you to create object classes with traits (sometimes referred to tentacles). We can build our objects picking from the build your own menu.
 we can say
@@ -66,7 +65,7 @@ create a tentacle for the borrowing functionality:
 	}})
 	
 
-now we can create our student class
+create Student class definition
 
 	var Student = Octopus.spawn("borrower, scheduled, otherStudentTrait", {
 		// this will be called after all traits have been initialized 
@@ -84,9 +83,9 @@ now we can create our student class
 	});
 
 
-now we can make as many students want
+now we can make Students
 
-	var st = new Student("jethro", {"biology":"104", "welding":"201"});
+	var myStudent = new Student("jethro", {"biology":"104", "welding":"201"});
 
 
 adding Backbone Events to an object
@@ -99,13 +98,67 @@ adding Backbone Events to an object
 		readMail();
 	});
 
+
+a state machine tentacle
+
+	_8.t("stateMachine", {
+		construct:function() {
+			this._states = {};
+			this._currentState = null;
+		},
+		state:function(id, state) {
+			if(state) {
+				this._createState(id, state.enter, state.exit);
+				return;
+			}
+			if(this._states[id]) {
+				if(this._currentState) 
+					this._states[this.currentState].exit.call(this)
+				this.currentState = id;
+				this._states[id].enter.call(this);
+			}
+		},
+		isState:function(state) {
+			return this.currentState == state;
+		},
+		_createState:function(id, enter, exit) {
+			if(!enter) enter = function() {};
+			if(!exit) exit = function() {};
+			this._states[id] = {enter:enter, exit:exit}
+		}
+	});
+	
+	_8.t("color", {
+		construct:function() {
+			this.setColor("none");
+		},
+		setColor:function(clr) {
+			this.color = clr;
+		}
+	});
+	
+to use:
+
+	var objWithStateMachine = _8.spawn("stateMachine", {
+		construct:function(initialState) {
+			this.state("on", function() {
+				this.setColor("green");
+			});
+			this.state("off", function() {
+				this.setColor("red");
+			});
+			this.state(initialState);
+		}
+	});
+	
+	var signalLight = new objWithStateMachine("off");
+	signalLight.state("on");
+	
     
 *----------------------------------------------------------------------------------*
 *  Namespacing:                                                                    *
 *----------------------------------------------------------------------------------*
 
-As applications get larger staying organized gets harder. Trying to balance not polluting the global scope while keeping every object accessible for testing gets tedious.
-You can use octopus paths to simplify namespacing your applications various modules.
 
    Octopus.path("myapp.models", {
       _books:[];
@@ -131,7 +184,46 @@ somewhere else in your app:
 *  Dependency Injection:                                                           *
 *----------------------------------------------------------------------------------*
 
+using traits to inject 
 
+	var viewManager = new ViewManager();
+
+	Octopus.t("viewEnabled", {
+		construct:function() {
+			this.viewManager = viewManager
+		}
+		render:function() {
+			this.viewManager.addView(this);
+		},
+		remove:function() {
+			this.viewManager.removeView(this);
+		}
+	});
+	
+using Octopus.go to inject octopus paths
+
+
+	Octopus.go({
+		// import a path
+		"models":"com.testApp.models",
+		// import a singleton object
+		"view":"com.testApp.viewManager",
+		// import a single function
+		"getTime":"com.testApp.utils.getTime",
+	}, function() {
+		
+		
+	});
+
+	
+
+
+
+
+
+
+
+====================================================================================
                                                                                 
                                                                                 
                                                    OOO8$ZZI.                    
