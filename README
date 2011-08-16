@@ -93,13 +93,13 @@ adding Backbone Events to an object
 	_8.t("events", Backbone.Events);
 	
 	var PostOffice = _8.spawn("events, goverment, employer");
-	var hollowStation = new PostOffice();
-	hollowStation.bing("mail", function() {
-		readMail();
+	var hollowStation = new PostOffice("898739-872");
+	hollowStation.bind("mail", function() {
+		// do some mail reading stuff
 	});
 
 
-a state machine tentacle
+a state-machine tentacle
 
 	_8.t("stateMachine", {
 		construct:function() {
@@ -139,14 +139,14 @@ a state machine tentacle
 	
 to use:
 
-	var objWithStateMachine = _8.spawn("stateMachine", {
+	var objWithStateMachine = _8.spawn("stateMachine, color", {
 		construct:function(initialState) {
-			this.state("on", function() {
+			this.state("on", {enter:function() {
 				this.setColor("green");
-			});
-			this.state("off", function() {
+			}});
+			this.state("off", {enter:function() {
 				this.setColor("red");
-			});
+			}});
 			this.state(initialState);
 		}
 	});
@@ -211,7 +211,9 @@ using Octopus.go to inject octopus paths
 		// import a single function
 		"getTime":"com.testApp.utils.getTime",
 	}, function() {
-		
+	
+		var interaction = new this.models.InteractionModel(this.getTime());
+		this.viewManager.appendInteractionList(interaction);
 		
 	});
 
