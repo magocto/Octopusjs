@@ -129,10 +129,10 @@ Dependencies:
 	// ------------
 	// a object to hold our namespaces
 	Octopus._paths = {};
-	
-	/* create, get, or append a namespace
-	 @param p {String} a dot delimited path
-	 @param addon {Object} object to be added to path
+	//create, get, or append a namespace
+	/* 
+	 * p {String} a dot delimited path
+	 * addon {Object} object to be added to path
 	*/
 	Octopus.path = function(p, addon) {
 		if(!_.isString(p)) throw "Octopus space path must be a String";

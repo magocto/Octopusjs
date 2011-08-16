@@ -246,7 +246,7 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-15'>#</a>
       </div>
-      <p>create a new base class to add traits to</p>
+      <p>create a new base class to graft traits on</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">_getBaseObj</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">construct</span><span class="p">)</span> <span class="p">{</span>
@@ -285,12 +285,10 @@
         <a class='octothorpe' href='#section-17'>#</a>
       </div>
       <h2>Namespacing</h2>
-<p>a object to hold our namespaces
-create, get, or append a namespace</p>
+<p>a object to hold our namespaces</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">_paths</span> <span class="o">=</span> <span class="p">{};</span>
-	</pre></div>
+      <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">_paths</span> <span class="o">=</span> <span class="p">{};</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div><div class='section' id='section-18'>
@@ -298,8 +296,11 @@ create, get, or append a namespace</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-18'>#</a>
       </div>
-      <p>@param p {String} a dot delimited path
-@param p</p>
+      <p>create, get, or append a namespace</p>
+<ul>
+<li>p {String} a dot delimited path</li>
+<li>addon {Object} object to be added to path</li>
+</ul>
     </div>
     <div class='code'>
       <div class="highlight"><pre>	<span class="nx">Octopus</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">addon</span><span class="p">)</span> <span class="p">{</span>
@@ -329,7 +330,7 @@ create, get, or append a namespace</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-20'>#</a>
       </div>
-      <p>create a new package if the one we are looking for is not there</p>
+      <p>create a new path object if needed</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">current</span><span class="p">)</span> <span class="nx">parent</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">current</span> <span class="o">=</span> <span class="p">{};</span>
@@ -341,7 +342,7 @@ create, get, or append a namespace</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-21'>#</a>
       </div>
-      <p>continue traversing if we are not at the bottom</p>
+      <p>continue traversing the path</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>		<span class="k">if</span><span class="p">(</span><span class="nx">parts</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="k">return</span> <span class="nx">Octopus</span><span class="p">.</span><span class="nx">_getPathObj</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">parts</span><span class="p">,</span> <span class="nx">addon</span><span class="p">);</span>
@@ -353,7 +354,7 @@ create, get, or append a namespace</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-22'>#</a>
       </div>
-      <p>at the last path extend if needed</p>
+      <p>do any appending</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>		<span class="k">if</span> <span class="p">(</span><span class="nx">addon</span><span class="p">)</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">addon</span><span class="p">);</span>
