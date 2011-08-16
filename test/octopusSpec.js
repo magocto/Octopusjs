@@ -78,8 +78,7 @@ describe("Octopus.spawn", function() {
 	it("It should have correct traits", function() {
 		var c1 = _8.spawn(["test1", "literal1"], {});
 		var t = new c1("arg1", "arg2");
-		
-		console.log(t);
+ 
 		var t2 = new c1();
 		expect(t.hasT("test1")).toBeTruthy();
 		expect(t.hasT("literal1")).toBeTruthy();
@@ -126,6 +125,39 @@ describe("Octopus.spawn", function() {
 	});
 	
 });
+describe("Octopus.spawnSingle", function() {
+	
+	it("should create an inited object", function() {
+		var obj = {
+				construct:function(config) {
+					this.config = config;
+					this.doThings();
+				},
+				doThings:function() {
+					
+				},
+				getConfiged:function() {
+					return this.config.isConfiged
+				}
+			};
+			var config = {
+				isConfiged:true
+			}
+			spyOn(obj, "construct").andCallThrough();
+			spyOn(obj, "doThings");
+
+			var initedObj = _8.spawnSingle("", obj, config);
+
+			
+			expect(initedObj).not.toBeNull();
+			
+			expect(initedObj.getConfiged()).toBeTruthy();
+			expect(initedObj._useConstructor).toHaveBeenCalled();
+			expect(initedObj.doThings).toHaveBeenCalled();
+	});
+
+});
+
 
 describe("Octopus.go", function() {
 	beforeEach(function() {
@@ -139,14 +171,14 @@ describe("Octopus.go", function() {
 	it("it should inject a function", function() {
 		var p = _8.path("test.go");
 		
-		spyOn(p, 'someFunc').andCallThrough()
+		spyOn(p, 'someFunc').andCallThrough();
 		
 		_8.go({"injectedFunc":"test.go.someFunc"}, function() {
 			this.injectedFunc();
 
 		});
 		
-		expect(p.someFunc).toHaveBeenCalled()
+		expect(p.someFunc).toHaveBeenCalled();
 	});
 	
 	it("it should inject a path", function() {

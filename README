@@ -168,6 +168,8 @@ A SignalLight composite class with color and stateMachine.
 	var corner1 = new SignalLight("off");
 	signalLight.state("on");
 	
+	
+
     
 *----------------------------------------------------------------------------------*
 *  Namespacing:                                                                    *

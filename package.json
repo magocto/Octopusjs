@@ -2,7 +2,7 @@
   "name"          : "octopus",
   "description"   : "A object composition library",
   "homepage"      : "",
-  "keywords"      : ["namespace", "object", "composition", "util", "dependacncy injection", "server", "client", "browser"],
+  "keywords"      : ["namespace", "object", "composition", "util", "dependecncy injection", "server", "client", "browser"],
   "author"        : "Jason Bennett <magocto@gmail.com>",
   "contributors"  : [],
   "dependencies"  : ["underscore"],
