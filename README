@@ -28,6 +28,12 @@ we can say
 
 This allows us to create a object that has events, a state-machine, has a view itself, holds other views, and is lockable. 
 
+#================== NOTE ======================#
+you can also call Octopus by its short form _8
+
+	 var models = _8.path("myapp.models");
+	 var EventTimer = _8.spawn(["events, timer"]);
+
 *----------------------------------------------------------------------------------*
 *  Tentacles/Traits and object composition:                                        *
 *----------------------------------------------------------------------------------*
@@ -41,8 +47,9 @@ In this example we have a library that can check out books to students, other li
 create a tentacle for the borrowing functionality:
 
 	Octopus.t("borrower", {
+		// this function will be called when the object that it is grafted onto is constructed
 		construct:function() {
-			// this function will be called when the object that it has it as a trait is constructed
+			
 			this._checkedOut = [];
 		},
 		checkout:function(book) {
@@ -80,6 +87,15 @@ now we can make as many students want
 	var st = new Student("jethro", {"biology":"104", "welding":"201"});
 
 
+adding Backbone Events to an object
+
+	_8.t("events", Backbone.Events);
+	
+	var PostOffice = _8.spawn("events, goverment, employer");
+	var hollowStation = new PostOffice();
+	hollowStation.bing("mail", function() {
+		readMail();
+	});
 
     
 *----------------------------------------------------------------------------------*
@@ -105,13 +121,13 @@ somewhere else in your app:
 	var models = Octopus.path("myapp.models");
 	models.addBook("Smashed, Squashed, Splattered, Chewed, Chunked and Spewed", "Lance Carbuncle");
 
-you can also call Octopus by its short form _8
-
-	 var models = _8.path("myapp.models");
 
 
 
 
+*----------------------------------------------------------------------------------*
+*  Dependency Injection:                                                           *
+*----------------------------------------------------------------------------------*
 
 
                                                                                 
