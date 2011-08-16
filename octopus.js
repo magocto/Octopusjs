@@ -30,7 +30,7 @@ Dependencies:
 	}
 	
 	// version
-	Octopus.VERSION = "0.1";
+	Octopus.VERSION = "0.1.0";
 
 	// Tentacles/Traits
 	// ----------

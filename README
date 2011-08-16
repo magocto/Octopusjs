@@ -9,54 +9,65 @@
                       |_|                |__/      
   
 
-octopus.js is a object composition library that allows you to create object classes with traits (sometimes referred to tentacles). We can build our objects picking from the build your own menu.
-we can say
+octopus.js is a object composition library that allows you to create object classes with traits/mixins called tentacles. 
+It is like a build your own class or object from the all-you-can-code functionality bar.
 
-	var MegaClass = Octopus.spawn(["events", "stateMachine", "view", "viewContainer", "lockable"], {
+This creates a class definition that has events, a state-machine, has a view itself, holds other views, and is lockable.
+The construct function will be called when our composite class is initialized after all the trait construct functions have been called.
+
+	var BuildYourOwnClass = Octopus.spawn(["events", "stateMachine", "view", "viewContainer", "lockable"], {
 		construct:function(locked, elementid) {
-			this.sm.setState("Idle");
+			this.state("Idle");
 			this.setLocked(locked);
 			this.view.setEl($("#"+elementid));
 		},
-		doSomeMegaClassStuff:function() {
-	
+		doSomeThisClassStuff:function() {
+			if(!this.isLocked()) {
+				// do some things
+			}
 		}
 	}
 
-	var m1 = new MegaClass(true, "someElementId");
-	m1.setState("gearing up");
-	m1.doSomeMegaClassStuff();
-
-This allows us to create a object that has events, a state-machine, has a view itself, holds other views, and is lockable. 
+	var byo = new BuildYourOwnClass(false, "someElementId");
+	byo.state("Running");
+	byo.doSomeThisClassStuff();
 
 #================== NOTE ======================#
-you can also call Octopus by its short form _8
+as of now all examples are stub code they will be replaced with examples from the jasmine-tests as they are added.
+
+
+
+The _8 identifier is a short form to call Octopus.
 
 	 var models = _8.path("myapp.models");
 	 var EventTimer = _8.spawn(["events, timer"]);
+	 
+	 
 
 *----------------------------------------------------------------------------------*
-*  Tentacles/Traits and object composition:                                        *
+*  Tentacles/Traits and Object Composition:                                        *
 *----------------------------------------------------------------------------------*
 
-Maximize you code reuse by using tentacles/traits to be grafted onto you objects 
 
+Tentacles/Traits are the selections on the build your own functionality. They are traits/mixins that are the building blocks of a Octopus composite object. They are the tentacles of a Octopus.
+The t function take a String id and a object containing the functions to be grafted onto the composite class's prototype. If a construct function (Optional) is defined it will be called when composite class is initialized before the class construct function is called.
 	
-In this example we have a library that can check out books to students, other libraries, and the restoration shop. I know, just go with it.
+In this example we have a library that can check out books to students, other libraries, so we want to create a borrower trait.
 
-	
-create a tentacle for the borrowing functionality:
+To create a tentacle for the borrowing functionality.
 
 	Octopus.t("borrower", {
-		// this function will be called when the object that it is grafted onto is constructed
 		construct:function() {
 			
 			this._checkedOut = [];
 		},
+		
+		// all other functions are placed onto the composite objects prototype
 		checkout:function(book) {
 			this._checkedOut.push(book);
 		}
 	});
+	
 	
 	Octopus.t("scheduled", {
 		setSchedule:function(schedule) {
@@ -65,7 +76,7 @@ create a tentacle for the borrowing functionality:
 	})
 	
 
-create Student class definition
+Create the Student composite class definition. You can pass the tentacle list as a comma delimited string or an array of strings.
 
 	var Student = Octopus.spawn("borrower, scheduled, otherStudentTrait", {
 		// this will be called after all traits have been initialized 
@@ -83,12 +94,12 @@ create Student class definition
 	});
 
 
-now we can make Students
+Create a new student.
 
 	var myStudent = new Student("jethro", {"biology":"104", "welding":"201"});
 
 
-adding Backbone Events to an object
+Adding Backbone Events as a tentacle.
 
 	_8.t("events", Backbone.Events);
 	
@@ -99,7 +110,7 @@ adding Backbone Events to an object
 	});
 
 
-a state-machine tentacle
+A simple state-machine tentacle.
 
 	_8.t("stateMachine", {
 		construct:function() {
@@ -128,6 +139,9 @@ a state-machine tentacle
 		}
 	});
 	
+	
+A color tentacle.	
+
 	_8.t("color", {
 		construct:function() {
 			this.setColor("none");
@@ -137,9 +151,9 @@ a state-machine tentacle
 		}
 	});
 	
-to use:
+A SignalLight composite class with color and stateMachine.
 
-	var objWithStateMachine = _8.spawn("stateMachine, color", {
+	var SignalLight = _8.spawn("stateMachine, color", {
 		construct:function(initialState) {
 			this.state("on", {enter:function() {
 				this.setColor("green");
@@ -151,7 +165,7 @@ to use:
 		}
 	});
 	
-	var signalLight = new objWithStateMachine("off");
+	var corner1 = new SignalLight("off");
 	signalLight.state("on");
 	
     
@@ -159,6 +173,8 @@ to use:
 *  Namespacing:                                                                    *
 *----------------------------------------------------------------------------------*
 
+
+You can defined create/get/append with Octopus.path. The first argument is the path as a dot-notation String. If the second argument is a object it will be appended to the path.
 
    Octopus.path("myapp.models", {
       _books:[];
@@ -171,7 +187,7 @@ to use:
        }
     });
 
-somewhere else in your app:
+Somewhere else in your app.
 
 	var models = Octopus.path("myapp.models");
 	models.addBook("Smashed, Squashed, Splattered, Chewed, Chunked and Spewed", "Lance Carbuncle");
@@ -184,7 +200,8 @@ somewhere else in your app:
 *  Dependency Injection:                                                           *
 *----------------------------------------------------------------------------------*
 
-using traits to inject 
+
+Using traits for dependency injection.
 
 	var viewManager = new ViewManager();
 
@@ -200,20 +217,23 @@ using traits to inject
 		}
 	});
 	
-using Octopus.go to inject octopus paths
+Using Octopus.go takes two arguments. The fist is a object in the format of injectName:injectedPath. The second is the anonymous function we want our paths injected into.
 
 
 	Octopus.go({
+	
 		// import a path
 		"models":"com.testApp.models",
+		
 		// import a singleton object
 		"view":"com.testApp.viewManager",
+		
 		// import a single function
 		"getTime":"com.testApp.utils.getTime",
+		
 	}, function() {
-	
-		var interaction = new this.models.InteractionModel(this.getTime());
-		this.viewManager.appendInteractionList(interaction);
+		  var interaction = new this.models.InteractionModel(this.getTime());
+		  this.viewManager.appendInteractionList(interaction);
 		
 	});
 
