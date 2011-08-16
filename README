@@ -56,13 +56,13 @@ create a tentacle for the borrowing functionality:
 		checkout:function(book) {
 			this._checkedOut.push(book);
 		}
-	}});
+	});
 	
 	Octopus.t("scheduled", {
 		setSchedule:function(schedule) {
 			this.schedule = schedule;
 		}
-	}})
+	})
 	
 
 create Student class definition
