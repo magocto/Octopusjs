@@ -1,14 +1,5 @@
-<pre>
-    )                                              
- ( /(           )                                  
- )\())       ( /(               (          (       
-((_)\    (   )\()) (   `  )    ))\  (      )\  (   
-  ((_)   )\ (_))/  )\  /(/(   /((_) )\    ((_) )\  
- / _ \  ((_)| |_  ((_)((_)_\ (_))( ((_)     ! ((_) 
-| (_) |/ _| |  _|/ _ \| '_ \)| || |(_-< _  | |(_-< 
- \___/ \__|  \__|\___/| .__/  \_,_|/__/(_)_/ |/__/ 
-                      |_|                |__/      
-</pre>
+Octopus.js
+----------
 
 octopus.js is a object composition library that allows you to create object classes with traits/mixins called tentacles. 
 It is like a build your own class or object from the all-you-can-code functionality bar.
