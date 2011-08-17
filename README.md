@@ -1,4 +1,4 @@
-<div>
+<pre>
     )                                              
  ( /(           )                                  
  )\())       ( /(               (          (       
@@ -8,8 +8,7 @@
 | (_) |/ _| |  _|/ _ \| '_ \)| || |(_-< _  | |(_-< 
  \___/ \__|  \__|\___/| .__/  \_,_|/__/(_)_/ |/__/ 
                       |_|                |__/      
-  
-</div>
+</pre>
 
 octopus.js is a object composition library that allows you to create object classes with traits/mixins called tentacles. 
 It is like a build your own class or object from the all-you-can-code functionality bar.
@@ -174,10 +173,8 @@ A SignalLight composite class with color and stateMachine.
 	
 	
 
-    
-*----------------------------------------------------------------------------------*
-*  Namespacing:                                                                    *
-*----------------------------------------------------------------------------------*
+Namespacing:
+------------
 
 
 You can defined create/get/append with Octopus.path. The first argument is the path as a dot-notation String. If the second argument is a object it will be appended to the path.
@@ -202,9 +199,9 @@ Somewhere else in your app.
 
 
 
-*----------------------------------------------------------------------------------*
-*  Dependency Injection:                                                           *
-*----------------------------------------------------------------------------------*
+
+Dependency Injection:
+---------------------
 
 
 Using traits for dependency injection.
@@ -247,51 +244,5 @@ Using Octopus.go takes two arguments. The fist is a object in the format of inje
 
 
 
-
-
-
-
-====================================================================================
-                                                                                
-                                                                                
-                                                   OOO8$ZZI.                    
-                                                MOD8OZZ$O7Z7I.                  
-                                              .OZZZZZZO77$OZ8Z.                 
-                                              ZZOZZ$$Z$7$ZZ7O$D.                
-                                            .OOZZZ7$ZO7I7$ZO7ZZ.                
-                                            OO$Z$$$7??$$7$$Z$.=.                
-                                I8++O$=.   .7=OZZI7O7$$$ZOO8OI?.                
-                            .~I?7+:,OO+I$  OOO$7Z7$Z$O$ZZZDZ$7..                
-                            ?:?~87N...$+:.DZ87$Z77+I=ZO8O$7ZZO..                
-                           .D=,=8,.   .+?.ZO7$$$8ZZ$Z+7OOOI~=.                  
-                           ~7?=8Z   7=+??$7$Z$ZO77$O$7$ZZ77I..                  
-             ..            $+7O$O   .... .7$$$O$$N$7O7ZZ7+M.,:8~.O..            
-           ~IIZ7$+.        .N?O7O8.     .ZZOZ$87ZOD$OZI?.,?$~+=~=+IZ            
-         +I7IZODZO7,       .:$+?ZZN.  .8=OOOZ$OZODDD+,.$.=+O=~+788~~..          
-        $777D.   .$I        ?IO$8IO$$7Z~I7I8Z$$$ON8??DD8+:7I$8ZDO++?+.          
-        =I$$Z.   ..7?.      .+NDZ8I7Z+Z?Z$Z8ZOZ$$$,?NN8~:,OD88DI~$??~. .        
-        ?77777,,   .O8..    .8OO8$$O$?I7$88IO?$8$78::D88I=IODOZOO+?,7$?.,..     
-        .=IO7ZO$Z$$$787ZDOZOZDOOD$~$I7ZZD$,77+~$8IOOMNZ8D$D=8ZOZ?D.N$+I$,I=.    
-         .=I?+I77OOOZ7$7I7+Z78O$~DZ?+O7ZZO87Z7==88$Z8N8OZ7OZ7OOZ. .I7,.?=7+.    
-     .      ~M+$IIII+?77+$8$88$O7IOZOZ$D7$7$?+Z7I8DDODM8Z8$OZM.   .77..OII..    
-        ..II..   ...,=MMOM$Z$$7Z8DN87$OO87Z7ID?7OZZZO?Z7N877M      +?OO=???.    
-      .Z==~.:7           .MZ$NN.IZO=$I7I7I7$ODZI8$~Z8Z$OIZDNIM...N$88$I==I.     
-    .+=~~?Z7I~     .....~,Z?$7D7?7~I?$IZ?I?~Z?7OI?8,$DZ$7$7IDZ7?$IIOIO:=~..     
-   .D=,=8. I+.   ..I8ZO$ZI7O$77I$Z$$,7$$7Z7$:8ZOIIOI$777II8O$~7ZI77::I8Z.       
-   D?~$8..?Z...DODOO77Z$D7Z$IOZD8$.ZI+$O88Z:7+Z77?7+DIZZ77I7ZO77.?~Z,.          
- ..?IZD~,?..O88DI=?:7OZ$8D$$$OOZ787O7Z8$ZZ$7Z?7?Z8?D$?I$$ZN7MM8M.               
- .8+:$88OZOZ$Z$$7Z~7$7??=IMMMM8OZO$?IDZ?7$$88877?+$Z7$7$$D.                     
- .7I~8D87ZIZZ$??=NI,.        ..M?87$O?D7I?MM~78O8$??OZ$O$O.                     
-  .7~I=87+II+N~.          .N    M8?8I+$$?IM. MMOI?DOOI7Z?DOZ8Z$$Z$Z...          
-   .O?:+$Z.                ?I.  .$,7II:78M.    MMMI78D$$$N?Z~7$I$II+O$..        
-                           .:~.. M87$I?7?M.     .:MM:Z887IOD8....:M877DM.       
-                           .+7.  .MZ77?D$M.         ZM$ZOI7ZOO$DDDM$?ZZ$.       
-                           I,I.    7O$OZ7$.           M$?Z$8O77IZ?7+I7Z7.       
-                         .:?=?     .8$+???.           .M=$ZZNI$$:7$I7$?~        
-                         .,I??     .D87O$$.              ?O+I7$$OZOIOO.         
-                         ..?,II.....8$~O$8.                 ..+MMMM.            
-                         .+I,+$D$=O$7ZZ8I.                                      
-                           =$:O+ZOI$?II.M                                       
-                            ?8.,:I:I.ON~                                        
-                              IM=$M~M+.                                         
+                                    
                                                                 
