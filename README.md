@@ -15,22 +15,24 @@ It is like a build your own class or object from the all-you-can-code functional
 This creates a class definition that has events, a state-machine, has a view itself, holds other views, and is lockable.
 The construct function will be called when our composite class is initialized after all the trait construct functions have been called.
 
-	var BuildYourOwnClass = Octopus.spawn(["events", "stateMachine", "view", "viewContainer", "lockable"], {
-		construct:function(locked, elementid) {
-			this.state("Idle");
-			this.setLocked(locked);
-			this.view.setEl($("#"+elementid));
-		},
-		doSomeThisClassStuff:function() {
-			if(!this.isLocked()) {
-				// do some things
-			}
+'
+var BuildYourOwnClass = Octopus.spawn(["events", "stateMachine", "view", "viewContainer", "lockable"], {
+	construct:function(locked, elementid) {
+		this.state("Idle");
+		this.setLocked(locked);
+		this.view.setEl($("#"+elementid));
+	},
+	doSomeThisClassStuff:function() {
+		if(!this.isLocked()) {
+			// do some things
 		}
 	}
+}
+'
 
-	var byo = new BuildYourOwnClass(false, "someElementId");
-	byo.state("Running");
-	byo.doSomeThisClassStuff();
+var byo = new BuildYourOwnClass(false, "someElementId");
+byo.state("Running");
+byo.doSomeThisClassStuff();
 
 #================== NOTE ======================#
 as of now all examples are stub code they will be replaced with examples from the jasmine-tests as they are added.
