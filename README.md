@@ -170,16 +170,16 @@ Namespacing:
 
 You can defined create/get/append with Octopus.path. The first argument is the path as a dot-notation String. If the second argument is a object it will be appended to the path.
 
-   Octopus.path("myapp.models", {
-      _books:[];
-       BookModel:function(title, author) {
-   		    this.title = title;
-   		    this.author = author;
-       },
-       addBook:function(title, author) {
-   		    this._books.push(new this.Bookmodel(title, Author);
-       }
-    });
+	Octopus.path("myapp.models", {
+		_books:[];
+		BookModel:function(title, author) {
+			this.title = title;
+			this.author = author;
+		},
+		addBook:function(title, author) {
+			this._books.push(new this.Bookmodel(title, Author);
+		}
+	});
 
 Somewhere else in your app.
 
