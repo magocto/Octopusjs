@@ -1,3 +1,4 @@
+<div>
     )                                              
  ( /(           )                                  
  )\())       ( /(               (          (       
@@ -8,6 +9,7 @@
  \___/ \__|  \__|\___/| .__/  \_,_|/__/(_)_/ |/__/ 
                       |_|                |__/      
   
+</div>
 
 octopus.js is a object composition library that allows you to create object classes with traits/mixins called tentacles. 
 It is like a build your own class or object from the all-you-can-code functionality bar.
@@ -16,25 +18,25 @@ This creates a class definition that has events, a state-machine, has a view its
 The construct function will be called when our composite class is initialized after all the trait construct functions have been called.
 
 '
-var BuildYourOwnClass = Octopus.spawn(["events", "stateMachine", "view", "viewContainer", "lockable"], {
-	construct:function(locked, elementid) {
-		this.state("Idle");
-		this.setLocked(locked);
-		this.view.setEl($("#"+elementid));
-	},
-	doSomeThisClassStuff:function() {
-		if(!this.isLocked()) {
-			// do some things
+	var BuildYourOwnClass = Octopus.spawn(["events", "stateMachine", "view", "viewContainer", "lockable"], {
+		construct:function(locked, elementid) {
+			this.state("Idle");
+			this.setLocked(locked);
+			this.view.setEl($("#"+elementid));
+		},
+		doSomeThisClassStuff:function() {
+			if(!this.isLocked()) {
+				// do some things
+			}
 		}
 	}
-}
-'
+	'
 
 var byo = new BuildYourOwnClass(false, "someElementId");
 byo.state("Running");
 byo.doSomeThisClassStuff();
 
-#================== NOTE ======================#
+NOTE:
 as of now all examples are stub code they will be replaced with examples from the jasmine-tests as they are added.
 
 
@@ -46,9 +48,9 @@ The _8 identifier is a short form to call Octopus.
 	 
 	 
 
-*----------------------------------------------------------------------------------*
-*  Tentacles/Traits and Object Composition:                                        *
-*----------------------------------------------------------------------------------*
+
+Tentacles/Traits and Object Composition: 
+----------------------------------------
 
 
 Tentacles/Traits are the selections on the build your own functionality. They are traits/mixins that are the building blocks of a Octopus composite object. They are the tentacles of a Octopus.
